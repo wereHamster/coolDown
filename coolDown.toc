@@ -1,4 +1,4 @@
-## Interface: 11100
+## Interface: 11200
 ## Title: coolDown
 ## Notes: Enhanced Spell Cooldown Bar.
 ## Author: wereHamster/asmdel
