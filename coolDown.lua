@@ -54,6 +54,7 @@ function coolDown:onUpdate()
 
 	for _, tbl in coolDownState do
 		local buttonFrame = IFrameFactory:Create("coolDown", "Button")
+		buttonFrame:SetScale(coolDownOptions.frameScale)
 		
 		buttonFrame.tbl = tbl
 		buttonFrame.bar:SetMinMaxValues(0, tbl[3])
@@ -74,7 +75,7 @@ function coolDown:onUpdate()
 
 		for iconIndex, spellInfo in tbl[4] do
 			local iconFrame = IFrameFactory:Create("coolDown", "Icon")
-
+			
 			iconFrame:ClearAllPoints()
 			iconDockInfo[2] = iconParent
 			iconFrame:SetPoint(unpack(iconDockInfo))

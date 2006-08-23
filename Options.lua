@@ -1,6 +1,7 @@
 
 coolDownOptions = { }
 
+coolDownOptions.frameScale = 1
 coolDownOptions.buttonDock = "Bottom"
 coolDownOptions.iconDock = "Right"
 coolDownOptions.minSpellDuration = 2.0
@@ -24,6 +25,8 @@ local frameDockTable = {
 
 
 function coolDownOptionsValidate()
+	default("frameScale", 1)
+	
 	default("buttonDock", "Bottom")
 	local buttonDirectionInfo = frameDockTable[coolDownOptions.buttonDock]
 	if (buttonDirectionInfo == nil) then
