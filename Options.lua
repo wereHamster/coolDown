@@ -4,6 +4,7 @@ coolDownOptions = { }
 coolDownOptions.buttonDock = "Bottom"
 coolDownOptions.iconDock = "Right"
 coolDownOptions.minSpellDuration = 2.0
+coolDownOptions.maxSpellDuration = 7200
 coolDownOptions.minItemDuration = 3.0
 coolDownOptions.backdropColor = { r = 0, g = 0, b = 0, a = 1 }
 coolDownOptions.barColor = { r = 0.4, g = 0.4, b = 0.95, a = 1 }
@@ -36,6 +37,7 @@ function coolDownOptionsValidate()
 	end
 
 	default("minSpellDuration", 2.2)
+	default("maxSpellDuration", 7200)
 	default("minItemDuration", 3.0)
 	default("backdropColor", { r = 0, g = 0, b = 0, a = 1 })
 	default("barColor", { r = 0.4, g = 0.4, b = 0.95, a = 1 })

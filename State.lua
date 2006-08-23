@@ -37,7 +37,9 @@ local function stateSpells()
 			local start, duration, hasCooldown = GetSpellCooldown(spellID, type)
 			if (hasCooldown == 1) then
 				if (start > 0) then
-					if (duration > coolDownOptions.minSpellDuration) then
+					local min = coolDownOptions.minSpellDuration
+					local max = coolDownOptions.maxSpellDuration
+					if (duration > min and duration < max) then
 						insert("S", start, duration, GetSpellTexture(spellID, type))
 					end
 				end
