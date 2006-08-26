@@ -1,6 +1,6 @@
 ## Interface: 11200
 ## Title: coolDown
-## Notes: Enhanced Spell Cooldown Bar.
+## Notes: Enhanced Spell Cooldown Bar
 ## Author: wereHamster/asmdel
 ## Dependencies: IFrameManager
 ## SavedVariablesPerCharacter: coolDownOptions

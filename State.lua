@@ -21,7 +21,7 @@ local function remove(type, start, duration)
 	end
 end
 
-local function sort(left,right)
+local function sort(left, right)
 	local now = GetTime()
 	return (left[3] - (now - left[2])) < (right[3] - (now - right[2]))
 end
