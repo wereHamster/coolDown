@@ -70,7 +70,7 @@ function FactoryInterface:Create(name)
 
 	frame.label = frame.bar:CreateFontString(nil, "OVERLAY")
 	frame.label:SetFontObject(coolDownFont)
-	frame.label:SetPoint("CENTER", frame, "CENTER", -1, 0)
+	frame.label:SetPoint("CENTER", frame, "CENTER", 0, -1)
 	frame.label:SetJustifyH("CENTER")
 	frame.label:SetTextColor(textColor.r, textColor.g, textColor.b, textColor.a)
 	frame:SetScript("OnUpdate", onUpdate)
