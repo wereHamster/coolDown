@@ -4,7 +4,7 @@ IFrameFactory("1.0"):Register("coolDown", "Button", FactoryInterface)
 
 local function time(left)
 	local min = math.floor(left / 60)
-	local sec = math.floor(math.mod(left, 60))
+	local sec = math.floor(math.fmod(left, 60))
 
 	if (this.min == min and this.sec == sec) then
 		return nil

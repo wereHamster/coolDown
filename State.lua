@@ -29,7 +29,7 @@ end
 
 local bookTypes = { BOOKTYPE_SPELL, BOOKTYPE_PET }
 local function stateSpells()
-	for _, type in bookTypes do
+	for _, type in ipairs(bookTypes) do
 		local spellID = 1
 		local spell = GetSpellName(spellID, type)
 	

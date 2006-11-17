@@ -52,7 +52,7 @@ function coolDown:onUpdate()
     local buttonDockInfo = frameDockTable[coolDownOptions.buttonDock]
     local iconDockInfo = frameDockTable[coolDownOptions.iconDock]
 	local frameParent = coolDownDock
-	for _, tbl in coolDownState do
+	for _, tbl in ipairs(coolDownState) do
 		local buttonFrame = IFrameFactory:Create("coolDown", "Button")
 		buttonFrame:SetScale(coolDownOptions.frameScale)
 		
@@ -73,7 +73,7 @@ function coolDown:onUpdate()
 
 		local iconParent = buttonFrame
 
-		for iconIndex, spellInfo in tbl[4] do
+		for iconIndex, spellInfo in pairs(tbl[4]) do
 			local iconFrame = IFrameFactory:Create("coolDown", "Icon")
 			
 			iconFrame:ClearAllPoints()
