@@ -12,11 +12,9 @@ Libs\IFrameFactory\IFrameFactory.lua
 Frames\Button.lua
 Frames\Icon.lua
 
-Options.lua
-State.lua
-Items.lua
-
 coolDown.lua
 coolDownFont.lua
 
-coolDown.xml
+coolDownOptions.lua
+coolDownShares.lua
+coolDownState.lua

@@ -1,5 +1,6 @@
 
 coolDownOptions = { }
+coolDown.Options = { }
 
 local defaultOptions = {
 	frameScale = 1,
@@ -15,7 +16,7 @@ local defaultOptions = {
 
 
 local function checkOption(option)
-	coolDownOptions[option] = coolDownOptions[option] or defaultOptions[option]
+	coolDown.Options[option] = coolDownOptions[option] or defaultOptions[option]
 end
 
 local frameDockTable = {
@@ -30,15 +31,15 @@ function coolDownOptionsValidate()
 	checkOption("frameScale")
 	
 	checkOption("buttonDock")
-	local buttonDirectionInfo = frameDockTable[coolDownOptions.buttonDock]
+	local buttonDirectionInfo = frameDockTable[coolDown.Options.buttonDock]
 	if (buttonDirectionInfo == nil) then
-		coolDownOptions.buttonDock = "Bottom"
+		coolDown.Options.buttonDock = "Bottom"
 	end
 
 	checkOption("iconDock")
-	local iconDockInfo = frameDockTable[coolDownOptions.iconDock]
+	local iconDockInfo = frameDockTable[coolDown.Options.iconDock]
 	if (iconDockInfo == nil) then
-		coolDownOptions.iconDock = "Right"
+		coolDown.Options.iconDock = "Right"
 	end
 
 	checkOption("minSpellDuration")

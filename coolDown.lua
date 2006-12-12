@@ -1,8 +1,6 @@
 
 local IFrameFactory = IFrameFactory("1.0")
 
-coolDownButton = { }
-
 local frameDockTable = {
 	["Top"] = { "BOTTOM", nil, "TOP", 0, -2 },
     ["Bottom"] = { "TOP", nil, "BOTTOM", 0, 2 },
@@ -10,62 +8,31 @@ local frameDockTable = {
     ["Right"] = { "LEFT", nil, "RIGHT", -1, 0 },
 }
 
-coolDown = { }
+CreateFrame("Frame", "coolDown", UIParent)
+coolDown:SetWidth(80)
+coolDown:SetHeight(32)
+coolDown:SetPoint("CENTER", UIParent, "CENTER")
+coolDown:SetMovable(true)
 
-local iface = IFrameManager:Interface()
-function iface:getName(frame)
-    return "coolDown"
-end
+IFrameManager:Register(coolDown, IFrameManager:Interface())
 
-function coolDown:onLoad()
-    coolDownDock:RegisterEvent("VARIABLES_LOADED")
-    coolDownDock:RegisterEvent("PLAYER_ENTERING_WORLD")
-    coolDownDock:RegisterEvent("UPDATE_SHAPESHIFT_FORMS")
-    coolDownDock:RegisterEvent("SPELLS_CHANGED")
-    coolDownDock:RegisterEvent("SPELL_UPDATE_COOLDOWN")
-    coolDownDock:RegisterEvent("CURRENT_SPELL_CAST_CHANGED")
-    coolDownDock:RegisterEvent("BAG_UPDATE_COOLDOWN")
-    coolDownDock:RegisterEvent("UNIT_INVENTORY_CHANGED")
-
-    coolDownDock:SetBackdropBorderColor(0, 0, 0, 1)
-    coolDownDock:SetBackdropColor(0, 0, 0, 1)
-
-    coolDownDock:Hide()
-
-    IFrameManager:Register(coolDownDock, iface)
-end
-
-function coolDown:onEvent()
-	coolDownDock:Show()
-end
-
-function coolDown:onUpdate()
-	coolDownDock:Hide()
-
+function coolDown:Update()
 	IFrameFactory:Clear("coolDown", "Button")
 	IFrameFactory:Clear("coolDown", "Icon")
-
-	coolDownOptionsValidate()
 	
-	coolDownDock:SetScale(coolDownOptions.frameScale)
-
-    local buttonDockInfo = frameDockTable[coolDownOptions.buttonDock]
-    local iconDockInfo = frameDockTable[coolDownOptions.iconDock]
-	local frameParent = coolDownDock
-	for _, tbl in ipairs(coolDownState) do
+    local buttonDockInfo = frameDockTable[coolDown.Options.buttonDock]
+    local iconDockInfo = frameDockTable[coolDown.Options.iconDock]
+	local frameParent = coolDown
+	for _, tbl in ipairs(coolDown.State) do
 		local buttonFrame = IFrameFactory:Create("coolDown", "Button")
-		buttonFrame:SetScale(coolDownOptions.frameScale)
+		buttonFrame:SetScale(coolDown.Options.frameScale)
 		
 		buttonFrame.tbl = tbl
 		buttonFrame.bar:SetMinMaxValues(0, tbl[3])
 		buttonFrame:ClearAllPoints()
 		buttonDockInfo[2] = frameParent
-		if (frameParent == coolDownDock) then
-			local relativeTo = buttonDockInfo[3]
-			buttonDockInfo[3] = buttonDockInfo[1]
-			buttonDockInfo[5], buttonDockInfo[4] = 0, 0
-			buttonFrame:SetPoint(unpack(buttonDockInfo))
-			buttonDockInfo[3] = relativeTo
+		if (frameParent == coolDown) then
+			buttonFrame:SetPoint("CENTER", coolDown, "CENTER")
 		else
 			buttonFrame:SetPoint(unpack(buttonDockInfo))
 		end
