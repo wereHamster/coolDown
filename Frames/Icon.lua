@@ -2,8 +2,8 @@
 local FactoryInterface = { }
 IFrameFactory("1.0"):Register("coolDown", "Icon", FactoryInterface)
 
-function FactoryInterface:Create(name)
-	local frame = CreateFrame("Frame", name, UIParent)
+function FactoryInterface:Create()
+	local frame = CreateFrame("Frame", nil, UIParent)
 	frame:SetWidth(30)
 	frame:SetHeight(30)
 

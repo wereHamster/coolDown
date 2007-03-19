@@ -34,8 +34,8 @@ local function onUpdate(self)
 	end
 end
 
-function FactoryInterface:Create(name)
-	local frame = CreateFrame("Frame", name, UIParent)
+function FactoryInterface:Create()
+	local frame = CreateFrame("Frame", nil, UIParent)
 	frame:SetWidth(80)
 	frame:SetHeight(32)
 

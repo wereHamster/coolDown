@@ -13,6 +13,7 @@ coolDown.Shares.C[13446] = "Interface\\Icons\\INV_Potion_54"
 coolDown.Shares.C[17348] = "Interface\\Icons\\INV_Potion_54"
 coolDown.Shares.C[17349] = "Interface\\Icons\\INV_Potion_54"
 coolDown.Shares.C[18839] = "Interface\\Icons\\INV_Potion_54"
+coolDown.Shares.C[22829] = "Interface\\Icons\\INV_Potion_54"
 
 -- Mana Potions
 coolDown.Shares.C[ 2455] = "Interface\\Icons\\INV_Potion_76"
@@ -24,6 +25,7 @@ coolDown.Shares.C[13444] = "Interface\\Icons\\INV_Potion_76"
 coolDown.Shares.C[17351] = "Interface\\Icons\\INV_Potion_76"
 coolDown.Shares.C[17352] = "Interface\\Icons\\INV_Potion_76"
 coolDown.Shares.C[18841] = "Interface\\Icons\\INV_Potion_76"
+coolDown.Shares.C[22832] = "Interface\\Icons\\INV_Potion_76"
 
 -- Mana Stones
 coolDown.Shares.C[ 5513] = "Interface\\Icons\\INV_Misc_Gem_Ruby_01"

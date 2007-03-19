@@ -36,7 +36,6 @@ function coolDown:Update()
 		else
 			buttonFrame:SetPoint(unpack(buttonDockInfo))
 		end
-		
 
 		local iconParent = buttonFrame
 
