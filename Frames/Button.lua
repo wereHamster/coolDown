@@ -2,16 +2,14 @@
 local FactoryInterface = { }
 IFrameFactory("1.0"):Register("coolDown", "Button", FactoryInterface)
 
-local function time(self, left)
-	local min = math.floor(left / 60)
-	local sec = math.floor(math.fmod(left, 60))
+local function format(self, time)
+	local min, sec = math.floor(time / 60), math.floor(math.fmod(time, 60))
 
 	if (self.min == min and self.sec == sec) then
 		return nil
 	end
 
-	self.min = min
-	self.sec = sec
+	self.min, self.sec = min, sec
 
 	return string.format("%02d:%02s", min, sec)
 end
@@ -21,13 +19,13 @@ local function onUpdate(self)
 		return
 	end
 
-	local left = self.tbl[3] - ( GetTime() - self.tbl[2] )
-	if (left > 0) then
-		local label = time(self, left)
+	local time = self.tbl[3] - ( GetTime() - self.tbl[2] )
+	if (time > 0) then
+		local label = format(self, time)
 		if (label) then
 			self.label:SetText(label)
 		end
-		self.bar:SetValue(left)
+		self.bar:SetValue(time)
 	else
 		coolDown:Clear(self.tbl)
 		coolDown:Update()
@@ -42,15 +40,8 @@ function FactoryInterface:Create()
 	local backdropTable = {
 		bgFile = "Interface\\Tooltips\\UI-Tooltip-Background",
 		edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
-		tile = true,
-		tileSize = 12,
-		edgeSize = 12,
-		insets = {
-			left = 2,
-			right = 2,
-			top = 2,
-			bottom = 2
-		}
+		tile = true, tileSize = 12, edgeSize = 12,
+		insets = { left = 2, right = 2, top = 2, bottom = 2 }
 	}
 
 	local backdropColor = coolDown.Options.backdropColor
