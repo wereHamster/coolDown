@@ -9,7 +9,11 @@ local function insert(type, start, duration, texture)
 			return
 		end
 	end
-
+	for _,tbl in pairs(coolDown.State) do
+		if (tbl[4][texture]) then
+			return
+		end
+	end
 	table.insert(coolDown.State, { type, start, duration, { [texture] = true } })
 end
 
