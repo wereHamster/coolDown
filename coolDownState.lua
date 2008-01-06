@@ -68,7 +68,7 @@ local function C()
 			local itemLink = GetContainerItemLink(bagIndex, invIndex)
 			if (itemLink) then
 				local start, duration, hasCooldown = GetContainerItemCooldown(bagIndex, invIndex)		
-	    		if (start > 0) then
+	    			if (start > 0) then
 					local itemID, _, _, _, _, type = GetItemInfo(itemLink)	
 					if (type == "Consumable" and duration > coolDown.Options.minItemDuration) then
 						insert("C", start, duration, coolDown.Shares.C[itemID] or (GetContainerItemInfo(bagIndex, invIndex)))
@@ -106,7 +106,7 @@ local function onEvent(self, event)
 end
 
 local function onUpdate(self)
-	self:Hide()
+	--self:Hide()
 	coolDownOptionsValidate()
 	
 	while next(Callbacks) do

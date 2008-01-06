@@ -6,7 +6,7 @@ local function format(self, time)
 	local min, sec = math.floor(time / 60), math.floor(math.fmod(time, 60))
 
 	if (self.min == min and self.sec == sec) then
-		return nil
+		return
 	end
 
 	self.min, self.sec = min, sec
@@ -61,7 +61,7 @@ function FactoryInterface:Create()
 
 	frame.label = frame.bar:CreateFontString(nil, "OVERLAY")
 	frame.label:SetFontObject(coolDownFont)
-	frame.label:SetPoint("CENTER", frame, "CENTER", 0, -1)
+	frame.label:SetPoint("CENTER", frame, "CENTER", 0, 0)
 	frame.label:SetJustifyH("CENTER")
 	frame.label:SetTextColor(textColor.r, textColor.g, textColor.b, textColor.a)
 	frame:SetScript("OnUpdate", onUpdate)
