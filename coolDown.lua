@@ -59,7 +59,7 @@ function coolDown:Update()
 		for _, tbl in ipairs(coolDown.State) do
 			if (func(unpack(tbl))) then
 				local btn = IFrameFactory:Create("coolDown", "Button")
-				btn:SetParent(btnParent)
+				btn:SetParent(dock[1])
 
 				btn.tbl = tbl
 				btn.bar:SetMinMaxValues(0, tbl[3])
@@ -74,7 +74,7 @@ function coolDown:Update()
 				local icnParent = btn
 				for tex in pairs(tbl[4]) do
 					local icn = IFrameFactory:Create("coolDown", "Icon")
-					icn:SetParent(icnParent)
+					icn:SetParent(dock[1])
 
 					iconDockInfo[2] = icnParent
 					icn:SetPoint(unpack(iconDockInfo))
