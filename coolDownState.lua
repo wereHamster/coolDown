@@ -1,13 +1,11 @@
 
 local function insert(type, start, duration, texture)
 	for _, tbl in ipairs(coolDown.State) do
-		if (tbl[1] == type and tbl[2] == start and tbl[3] == duration) then
+		if (tbl[1] == type and (tbl[2] == start and tbl[3] == duration or tbl[4][texture])) then
+			tbl[2] = start
+			tbl[3] = duration
 			tbl[4][texture] = true
-			return
-		end
-	end
-	for _,tbl in pairs(coolDown.State) do
-		if (tbl[4][texture]) then
+
 			return
 		end
 	end
@@ -92,10 +90,10 @@ local function onEvent(self, event)
 	end
 end
 
+coolDown.State = { }
 local function onUpdate(self)
 	self:Hide()
 
-	coolDown.State = { }
 	for func in pairs(Callbacks) do
 		Callbacks[func] = nil
 		func()
