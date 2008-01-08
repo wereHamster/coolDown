@@ -1,7 +1,4 @@
 
-coolDown.State = { }
-local Callbacks = { }
-
 local function insert(type, start, duration, texture)
 	for _, tbl in ipairs(coolDown.State) do
 		if (tbl[1] == type and tbl[2] == start and tbl[3] == duration) then
@@ -33,16 +30,13 @@ end
 
 local bookTypes = { BOOKTYPE_SPELL, BOOKTYPE_PET }
 local function S()
-	local min = coolDown.Options.minSpellDuration
-	local max = coolDown.Options.maxSpellDuration
-	
 	for _, type in ipairs(bookTypes) do
 		local spellID = 1
 		local spell = GetSpellName(spellID, type)
 		
 		while (spell) do
 			local start, duration, hasCooldown = GetSpellCooldown(spellID, type)
-			if (hasCooldown == 1 and start > 0 and duration > min and duration < max) then
+			if (hasCooldown == 1 and start > 0 and duration > 2) then
 				insert("S", start, duration, GetSpellTexture(spellID, type))
 			end
 			
@@ -56,7 +50,7 @@ local function I()
 	for i=0, 1 do
 		local slotID = GetInventorySlotInfo("Trinket"..i.."Slot")
 		local start, duration, hasCooldown = GetInventoryItemCooldown("player", slotID)
-		if (hasCooldown == 1 and start > 0 and duration > coolDown.Options.minItemDuration) then
+		if (hasCooldown == 1 and start > 0 and duration > 2) then
 			insert("I", start, duration, GetInventoryItemTexture("player", slotID))
 		end
 	end
@@ -70,7 +64,7 @@ local function C()
 				local start, duration, hasCooldown = GetContainerItemCooldown(bagIndex, invIndex)		
 	    			if (start > 0) then
 					local itemID, _, _, _, _, type = GetItemInfo(itemLink)	
-					if (type == "Consumable" and duration > coolDown.Options.minItemDuration) then
+					if (type == "Consumable" and duration > 2) then
 						insert("C", start, duration, coolDown.Shares.C[itemID] or (GetContainerItemInfo(bagIndex, invIndex)))
 					end
 				end
@@ -79,6 +73,7 @@ local function C()
 	end
 end
 
+local Callbacks = { }
 local eventMap = {
 	["PLAYER_ENTERING_WORLD"] = { S, I, C },
 	["UPDATE_SHAPESHIFT_FORMS"] = { S },
@@ -92,39 +87,46 @@ local eventMap = {
 local function onEvent(self, event)
 	self:Show()
 
-	for _, cb in pairs(eventMap[event]) do
-		table.insert(Callbacks, cb)
-	end
-
-	if (event == "UNIT_INVENTORY_CHANGED") then
-		for idx, tbl in ipairs(coolDown.State) do
-			if (tbl[1] == "I") then
-				table.remove(coolDown.State, idx)
-			end
-		end
+	for _, cb in ipairs(eventMap[event]) do
+		Callbacks[cb] = cb
 	end
 end
 
 local function onUpdate(self)
-	--self:Hide()
-	coolDownOptionsValidate()
-	
-	while next(Callbacks) do
-		table.remove(Callbacks)()
+	self:Hide()
+
+	coolDown.State = { }
+	for func in pairs(Callbacks) do
+		Callbacks[func] = nil
+		func()
 	end
 	
 	table.sort(self.State, sort)
 	coolDown:Update()
 end
 
-
-for event in pairs(eventMap) do
-	coolDown:RegisterEvent(event)
-end
-
-coolDown:SetScript("OnEvent", onEvent)
+coolDown:RegisterEvent("VARIABLES_LOADED")
 coolDown:SetScript("OnUpdate", onUpdate)
+coolDown:SetScript("OnEvent", function()
+        for conf, func in pairs(coolDownConfig) do
+                local dock = CreateFrame("Frame", "cD:"..conf[1], UIParent)
+                IFrameManager:Register(dock, IFrameManager:Interface())
+
+                dock:SetWidth(80)
+                dock:SetHeight(32)
+                dock:SetPoint("CENTER", UIParent, "CENTER")
+                dock:SetScale(conf[2])
+
+                coolDown.Docks[{ dock, conf[3], conf[4] }] = loadstring(func)()
+        end
+
+	for event in pairs(eventMap) do
+		coolDown:RegisterEvent(event)
+	end
+	coolDown:SetScript("OnEvent", onEvent)
+end)
 
 function coolDown:Clear(...)
 	remove(unpack(select(1, ...)))
 end
+

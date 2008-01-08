@@ -1,44 +1,9 @@
 
 local IFrameFactory = IFrameFactory("1.0")
 
---[[
-	The default config should fit most users. It contains one dock for
-	spells and one for inventory items.
-]]
-coolDownConfig = {
-	[{ "Spells", 1, "Bottom", "Right" }] =
-		[[ return function(type, start, duration, textures) 
-			return type == "S" and duration > 4
-		end ]],
-	[{ "Items", 1, "Bottom", "Right" }] =
-		[[ return function(type, start, duration, textures) 
-			return type == "I" and duration > 4
-		end ]],
-}
-
-
-CreateFrame("Frame", "coolDown", UIParent)
-coolDown:SetWidth(80)
-coolDown:SetHeight(32)
-coolDown:SetPoint("CENTER", UIParent, "CENTER")
-
+coolDown = CreateFrame("Frame")
 coolDown.Docks = { }
 
-local f = CreateFrame("Frame")
-f:RegisterEvent("VARIABLES_LOADED")
-f:SetScript("OnEvent", function()
-	for conf, func in pairs(coolDownConfig) do
-		local dock = CreateFrame("Frame", "cD:"..conf[1], UIParent)
-		IFrameManager:Register(dock, IFrameManager:Interface())
-
-		dock:SetWidth(80)
-		dock:SetHeight(32)
-		dock:SetPoint("CENTER", UIParent, "CENTER")
-		dock:SetScale(conf[2])
-
-		coolDown.Docks[{ dock, conf[3], conf[4] }] = loadstring(func)()
-	end
-end)
 
 local frameDockTable = {
 	["Top"] = { "BOTTOM", nil, "TOP", 0, -2 },

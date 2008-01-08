@@ -44,26 +44,22 @@ function FactoryInterface:Create()
 		insets = { left = 2, right = 2, top = 2, bottom = 2 }
 	}
 
-	local backdropColor = coolDown.Options.backdropColor
-	local barColor = coolDown.Options.barColor
-	local textColor = coolDown.Options.textColor
-
 	frame:SetBackdrop(backdropTable)
-	frame:SetBackdropBorderColor(backdropColor.r, backdropColor.g, backdropColor.b, backdropColor.a)
-	frame:SetBackdropColor(backdropColor.r, backdropColor.g, backdropColor.b, backdropColor.a)
+	frame:SetBackdropBorderColor(0, 0, 0, 1)
+	frame:SetBackdropColor(0, 0, 0, 1)
 
 	frame.bar = CreateFrame("StatusBar", nil, frame)
 	frame.bar:SetPoint("Center", frame)
 	frame.bar:SetWidth(70)
 	frame.bar:SetHeight(22)
 	frame.bar:SetStatusBarTexture("Interface\\AddOns\\coolDown\\Textures\\Smooth")
-	frame.bar:SetStatusBarColor(barColor.r, barColor.g, barColor.b, barColor.a)
+	frame.bar:SetStatusBarColor(0.4, 0.4, 0.95, 1)
 
 	frame.label = frame.bar:CreateFontString(nil, "OVERLAY")
 	frame.label:SetFontObject(coolDownFont)
 	frame.label:SetPoint("CENTER", frame, "CENTER", 0, 0)
 	frame.label:SetJustifyH("CENTER")
-	frame.label:SetTextColor(textColor.r, textColor.g, textColor.b, textColor.a)
+	frame.label:SetTextColor(1, 0.82, 0, 1)
 	frame:SetScript("OnUpdate", onUpdate)
 
 	return frame

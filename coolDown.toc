@@ -15,6 +15,6 @@ Frames\Icon.lua
 coolDown.lua
 coolDownFont.lua
 
-coolDownOptions.lua
+coolDownConfig.lua
 coolDownShares.lua
 coolDownState.lua
