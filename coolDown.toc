@@ -3,7 +3,7 @@
 ## Notes: Enhanced Spell Cooldown Bar
 ## Author: wereHamster/asmdel
 ## Dependencies: IFrameManager
-## SavedVariablesPerCharacter: coolDownOptions
+## SavedVariablesPerCharacter: coolDownConfig
 
 # -- IFrameFactory
 ## OptionalDeps: IFrameFactory
