@@ -4,13 +4,17 @@
 	spells and one for inventory items.
 ]]
 coolDownConfig = {
-	[{ "Spells", 1, "Bottom", "Right" }] =
+	["Spells"] = {
+		{ 1, "Bottom", "Right" },
 		[[ return function(type, start, duration, textures)
 			return type == "S" and duration > 4
 		end ]],
-	[{ "Items", 1, "Bottom", "Right" }] =
+	},
+	["Items"] = {
+		{ 1, "Bottom", "Right" },
 		[[ return function(type, start, duration, textures)
 			return type == "I" and duration > 4
 		end ]],
+	}
 }
 

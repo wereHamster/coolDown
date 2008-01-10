@@ -106,16 +106,16 @@ end
 coolDown:RegisterEvent("VARIABLES_LOADED")
 coolDown:SetScript("OnUpdate", onUpdate)
 coolDown:SetScript("OnEvent", function()
-        for conf, func in pairs(coolDownConfig) do
-                local dock = CreateFrame("Frame", "cD:"..conf[1], UIParent)
+        for name, conf in pairs(coolDownConfig) do
+                local dock = CreateFrame("Frame", "cD:"..name, UIParent)
                 IFrameManager:Register(dock, IFrameManager:Interface())
 
                 dock:SetWidth(80)
                 dock:SetHeight(32)
                 dock:SetPoint("CENTER", UIParent, "CENTER")
-                dock:SetScale(conf[2])
+                dock:SetScale(conf[1][1])
 
-                coolDown.Docks[{ dock, conf[3], conf[4] }] = loadstring(func)()
+                coolDown.Docks[{ dock, conf[1][2], conf[1][3] }] = loadstring(conf[2])()
         end
 
 	for event in pairs(eventMap) do
