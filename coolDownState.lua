@@ -103,7 +103,7 @@ local function onUpdate(self)
 	coolDown:Update()
 end
 
-coolDown:RegisterEvent("VARIABLES_LOADED")
+coolDown:RegisterEvent("ADDON_LOADED")
 coolDown:SetScript("OnUpdate", onUpdate)
 coolDown:SetScript("OnEvent", function()
         for name, conf in pairs(coolDownConfig) do
@@ -118,6 +118,7 @@ coolDown:SetScript("OnEvent", function()
                 coolDown.Docks[{ dock, conf[1][2], conf[1][3] }] = loadstring(conf[2])()
         end
 
+	coolDown:UnregisterAllEvents()
 	for event in pairs(eventMap) do
 		coolDown:RegisterEvent(event)
 	end
