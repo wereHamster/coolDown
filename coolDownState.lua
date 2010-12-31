@@ -30,8 +30,8 @@ local bookTypes = { BOOKTYPE_SPELL, BOOKTYPE_PET }
 local function S()
 	for _, type in ipairs(bookTypes) do
 		local spellID = 1
-		local spell = GetSpellName(spellID, type)
-		
+		local spell = GetSpellBookItemName(spellID, type)
+
 		while (spell) do
 			local start, duration, hasCooldown = GetSpellCooldown(spellID, type)
 			if (hasCooldown == 1 and start > 0 and duration > 2) then
@@ -39,7 +39,7 @@ local function S()
 			end
 			
 			spellID = spellID + 1
-			spell = GetSpellName(spellID, type)
+			spell = GetSpellBookItemName(spellID, type)
 		end
 	end
 end
@@ -82,7 +82,7 @@ local eventMap = {
 	["UNIT_INVENTORY_CHANGED"] = { I },
 }
 
-local function onEvent(self, event)
+local function onEvent(self, event, ...)
 	self:Show()
 
 	for _, cb in ipairs(eventMap[event]) do
@@ -105,7 +105,7 @@ end
 
 coolDown:RegisterEvent("ADDON_LOADED")
 coolDown:SetScript("OnUpdate", onUpdate)
-coolDown:SetScript("OnEvent", function()
+coolDown:SetScript("OnEvent", function(self, event, ...)
         for name, conf in pairs(coolDownConfig) do
                 local dock = CreateFrame("Frame", "cD:"..name, UIParent)
                 IFrameManager:Register(dock, IFrameManager:Interface())
