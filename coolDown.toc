@@ -5,8 +5,7 @@
 ## Dependencies: IFrameManager
 ## SavedVariablesPerCharacter: coolDownConfig
 
-# -- IFrameFactory
-## OptionalDeps: IFrameFactory
+## OptionalDeps: IFrameFactory git@github.com:wereHamster/IFrameFactory.git 51b9119:Lib/
 Libs\IFrameFactory\IFrameFactory.lua
 
 Frames\Button.lua
